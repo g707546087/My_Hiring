@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:websocket="http://www.springframework.org/schema/websocket"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/websocket
+    http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+    
+     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="txManager"/>
+        <!-- <property name="databaseSchema" value="oneportal_activiti"/> -->
+        <property name="databaseSchemaUpdate" value="true"/>
+        <property name="jobExecutorActivate" value="false"/>
+        <property name="dbIdentityUsed" value="false" />  
+        <property name="history" value="full" />
+        <property name="processDefinitionCacheLimit" value="10" />
+
+ 
+
+        <!-- 生成流程图的字体 -->
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
+
+ 
+ 
+        
+ 
+ 
+        <!-- 全局事件 -->
+       <property name="typedEventListeners">
+            <map>
+                <entry key="VARIABLE_CREATED" >
+                    <list>
+                        <ref bean="variableCreateListener"/>
+                    </list>
+                </entry>
+            </map>
+        </property> 
+    </bean>
+  </beans>
+   
